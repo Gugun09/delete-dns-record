@@ -4,6 +4,8 @@ EMAIL="queen-ssh.my.id"
 KEY="25dcbdfd2aa42f3b0d447c897fd989ce05895"
 ZONE_ID="827c3471b4f1734d19f1315add1fb306"
 
+i=1
+
 curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records?per_page=500" \
      -H "X-Auth-Email: ${EMAIL}" \
      -H "X-Auth-Key: ${KEY}" \
@@ -13,6 +15,7 @@ curl -sLX GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records
       -H "X-Auth-Email: ${EMAIL}" \
       -H "X-Auth-Key: ${KEY}" \
       -H "Content-Type: application/json" -o /dev/null
-    echo "DNS record with ID $id has been deleted."
+    echo "($i) DNS record with ID $id has been deleted."
+    i=$((i+1))
   done
 )
